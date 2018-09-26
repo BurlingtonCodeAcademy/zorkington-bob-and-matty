@@ -1,3 +1,14 @@
+class Room {
+  constructor() {
+  }
+}
+
+const mainSt = new Room();
+const mrMikes = new Room();
+const muddyWaters = new Room();
+const foyer = new Room();
+const classRoom = new Room();
+
 function enterRoom (nextRoom) {
   let validTransition = room[currentRoom].canChangeTo;
   if (validTransition.includes(nextRoom)) {
@@ -7,12 +18,14 @@ function enterRoom (nextRoom) {
     throw 'invalid path from ' + currentRoom + ' to ' + nextRoom;
   }
 }
-let currentRoom = null;
-function moveToRoom(newRoom) {
-  if (canMoveToRoom(newRoom)) {
+
+let currentRoom = mainSt;
+/*function moveToRoom(newRoom) {
+  if (validTransition.includes(newRoom)) {
     currentRoom = newRoom
   }
-}
+}*/
+
 state = {
   "mainSt": {canChangeTo: ["foyer", "mrMikes", "muddyWaters"]},
   "mrMikes": {canChangeTo: ["mainSt"]},
@@ -22,31 +35,6 @@ state = {
 
 };
 
-
-const mainSt = {
-  mainDoor : 'isLocked',
-  sign : 'Welcome to Burlington Code Academy!/n Come on up to the second floor./n If the door is locked, use the code12345.'
-  
-};
-
-const mrMikes = {
-
-};
-
-const muddyWaters = {
-
-};
-
-const foyer = {
-
-};
-
-const classRoom = {
-
-};
-
-/*class Room {
-  constructor() {
-    this.state = {}
-  }
-}*/
+console.log(currentRoom);
+enterRoom(mrMikes);
+console.log(currentRoom)
