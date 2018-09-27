@@ -77,6 +77,4 @@ function enterRoom (nextRoom) {
   }
 }
 
-console.log(currentRoom);
-enterRoom(mrMikes);
-console.log(currentRoom);
+
