@@ -98,20 +98,19 @@ function enterRoom (nextRoom) {
 
 //this is where the body of the game starts, everything above is framework, and functional (I think)
 
-startGame();
 async function startGame() {
-  let init = await ask('Welcome to our world. Please do not use punctuation. Are you prepared?')
-  if (init.toLowerCase() = 'yes' || 'y' || 'yup') {
+  let init = await ask('Welcome to our world. Please do not use punctuation. Are you prepared? ')
+  if (init.toLowerCase() = 'yes') {
     mainStart();
   }
-  else {console.log("Let's try that again");
+  else {console.log("Let's try that again...");
   startGame();};
 };
 
 async function mainStart() {
   enterRoom(mainSt);
   let userIn = await ask('>_ ')
-  if (userIn.toLowerCase === 'read sign' || 'examine sign') {
+  if (userIn.toLowerCase === 'read sign') {
     mainSt.sign();
     mainStart();
   }
@@ -150,7 +149,7 @@ async function mainStart() {
   }
   else {console.log('Invalid input. Please try again');
   mainStart();}
-}
+};
 
 async function mrMikesStart() {
   enterRoom(mrMikes);
@@ -159,7 +158,7 @@ async function mrMikesStart() {
     mainStart();
   }
 
-}
+};
 
 async function muddyStart() {
   enterRoom(muddyWaters);
@@ -168,16 +167,23 @@ async function muddyStart() {
     mainStart();
   }
 
-}
+};
 
 async function foyerStart() {
   enterRoom(foyer);
   let userIn = await ask('>_ ');
   if (userIn.toLowerCase() === 'exit') {
-    mainStart()
+    mainStart();
+  }
+  else if (userIn.toLowerCase() === 'go upstairs') {
+    classStart();
+  }
+  else if (userIn.toLowerCase() === 'take paper') {
+    foyer.takePaper();
+    foyerStart();
   }
 
-}
+};
 
 async function classStart() {
   enterRoom(classRoom);
@@ -186,7 +192,10 @@ async function classStart() {
     foyerStart();
   }
 
-}
+};
+
+
+startGame();
 
 /*Main St. if currentRoom === state.mainSt
 if user reads sign mainSt.sign()
