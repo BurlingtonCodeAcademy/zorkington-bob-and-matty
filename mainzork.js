@@ -64,19 +64,6 @@ state = {
 
 let currentRoom = mainSt;
 
-let validTransition = currentRoom.canChangeTo;
-if (validTransition.includes(nextRoom)) {
-  currentRoom = nextRoom;
-}
-else {
-  throw 'invalid path from ' + currentRoom + ' to ' + nextRoom;
-};
-
-function moveToRoom(newRoom) {
-  if (validTransition.includes(newRoom)) {
-    currentRoom = newRoom
-  }
-}//Room[currentRoom] = undefined line 67 changed to currentRoom from Room[currentRoom]
 
 
 console.log(currentRoom);
