@@ -2,7 +2,20 @@ class Room {
   constructor() {
     this.roomInventory = []
   }
-}
+};
+
+const readline = require('readline');
+
+const readlineInterface = readline.createInterface({
+  input: process.stdin,
+  output: process.stdout
+});
+
+function ask(questionText) {
+  return new Promise((resolve, reject) => {
+    readlineInterface.question(questionText, resolve);
+  });
+};
 
 const playerInventory = [];
 
@@ -30,7 +43,7 @@ muddyWaters.description = () => {
 muddyWaters.coffee = () => {
   console.log('You buy some piping hot coffee');
   playerInventory.push('coffee')
-}
+};
 
 const foyer = new Room();
 foyer.isLocked = true;
@@ -61,11 +74,11 @@ classRoom.giveCoffee = () => {
 const rooms = [mainSt, mrMikes, muddyWaters, foyer, classRoom];
 
 state = {
-  mainSt: {canChangeTo: [foyer, mrMikes, muddyWaters]},
-  mrMikes: {canChangeTo: [mainSt]},
-  muddyWaters: {canChangeTo: [mainSt]},
-  foyer: {canChangeTo: [mainSt, classRoom]},
-  classRoom: {canChangeTo: [foyer]}
+  mainSt: {canChangeTo: [foyer, mrMikes, muddyWaters, mainSt]},
+  mrMikes: {canChangeTo: [mainSt, mrMikes]},
+  muddyWaters: {canChangeTo: [mainSt, muddyWaters]},
+  foyer: {canChangeTo: [mainSt, classRoom, foyer]},
+  classRoom: {canChangeTo: [foyer, classRoom]}
 
 };
 
@@ -81,6 +94,98 @@ function enterRoom (nextRoom) {
   else {
     throw 'invalid path from ' + currentRoom + ' to ' + nextRoom;
   }
+};
+
+//this is where the body of the game starts, everything above is framework, and functional (I think)
+
+startGame();
+async function startGame() {
+  let init = await ask('Welcome to our world. Please do not use punctuation. Are you prepared?')
+  if (init.toLowerCase() = 'yes' || 'y' || 'yup') {
+    mainStart();
+  }
+  else {console.log("Let's try that again");
+  startGame();};
+};
+
+async function mainStart() {
+  enterRoom(mainSt);
+  let userIn = await ask('>_ ')
+  if (userIn.toLowerCase === 'read sign' || 'examine sign') {
+    mainSt.sign();
+    mainStart();
+  }
+  else if (userIn.toLowerCase === ('open door' && foyer.isLocked === true)) {
+    console.log('The door is locked.');
+    mainStart();
+  }
+  else if (userIn.toLowerCase === ('open door' && foyer.isLocked === false)) {
+    foyerStart();
+  }
+  else if (userIn.toLowerCase === 'unlock door') {
+    let keypad = await ask('The keypad has 0-9 on it.\nWhat would you like to enter?');
+    if (keypad === '12345') {
+      mainSt.unlock();
+      mainStart()
+    }
+    else {
+      console.log('bzzzzt...wrong code.');
+      mainStart();
+    }
+  }
+  else if (userIn.toLowerCase === 'go to mr mikes') {
+    mrMikesStart();
+  }
+  else if (userIn.toLowerCase === 'go to muddy waters') {
+    muddyStart();
+  }
+  else if (userIn.toLowerCase === 'exit'){
+    let confirmExit = await ask("Are you sure you'd like to quit (Y/N)?");
+    if (confirmExit.toLowerCase() === 'n'){
+      mainStart();
+    }
+    else if (confirmExit.toLowerCase() === 'y') {
+      process.exit();
+    };
+  }
+  else {console.log('Invalid input. Please try again');
+  mainStart();}
+}
+
+async function mrMikesStart() {
+  enterRoom(mrMikes);
+  let userIn = await ask('>_ ');
+  if (userIn.toLowerCase() === 'exit') {
+    mainStart();
+  }
+
+}
+
+async function muddyStart() {
+  enterRoom(muddyWaters);
+  let userIn = await ask('>_ ');
+  if (userIn.toLowerCase() === 'exit') {
+    mainStart();
+  }
+
+}
+
+async function foyerStart() {
+  enterRoom(foyer);
+  let userIn = await ask('>_ ');
+  if (userIn.toLowerCase() === 'exit') {
+    mainStart()
+  }
+
+}
+
+async function classStart() {
+  enterRoom(classRoom);
+  let userIn = await ask('>_ ');
+  if (userIn.toLowerCase() === 'exit') {
+    foyerStart();
+  }
+
 }
 
 /*Main St. if currentRoom === state.mainSt
@@ -108,5 +213,4 @@ talk to alex, listen to lecture, etc. if no coffee in inventory -> classRoom.lec
 if coffee in inventory allow classRoom.giveCoffee() else console.log Alex needs coffee,
 then enable classRoom.lectureHasCoffee
 exit enterRoom(foyer)
-
 */
