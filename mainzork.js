@@ -56,33 +56,27 @@ const playerInventory = [];
 const rooms = [mainSt, mrMikes, muddyWaters, foyer, classRoom];
 
 state = {
-  "mainSt": {canChangeTo: ["foyer", "mrMikes", "muddyWaters"]},
-  "mrMikes": {canChangeTo: ["mainSt"]},
-  "muddyWaters": {canChangeTo: ["mainSt"]},
-  "foyer": {canChangeTo: ["mainSt", "classRoom"]},
-  "classRoom": {canChangeTo: ["foyer"]}
+  mainSt: {canChangeTo: [foyer, mrMikes, muddyWaters]},
+  mrMikes: {canChangeTo: [mainSt]},
+  muddyWaters: {canChangeTo: [mainSt]},
+  foyer: {canChangeTo: [mainSt, classRoom]},
+  classRoom: {canChangeTo: [foyer]}
 
 };
 
 
-let currentRoom = mainSt;
+let currentRoom = state.mainSt;
 
 function enterRoom (nextRoom) {
-  let validTransition = Room[currentRoom].canChangeTo;
+  let validTransition = currentRoom.canChangeTo;
   if (validTransition.includes(nextRoom)) {
-    currentRoom = nextRoom;
+    currentRoom = state.nextRoom;
   }
   else {
     throw 'invalid path from ' + currentRoom + ' to ' + nextRoom;
   }
 }
 
-/*function moveToRoom(newRoom) {
-  if (canMoveToRoom(newRoom)) {
-    currentRoom = newRoom
-  }
-}*/
-
 console.log(currentRoom);
 enterRoom(mrMikes);
-console.log(currentRoom)
+console.log(currentRoom);
