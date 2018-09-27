@@ -5,7 +5,7 @@ class Room {
 }
 
 const playerInventory = [];
-const rooms = [];
+const rooms = [mainSt, mrMikes, muddyWaters, foyer, classRoom];
 
 const mainSt = new Room();
 mainSt.description = () => {
