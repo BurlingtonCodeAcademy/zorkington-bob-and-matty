@@ -48,6 +48,9 @@ classRoom.lectureNoCoffee = () => {
 classRoom.lectureHasCoffee = () => {
   console.log('Alex delivers a cogent lecture.\nAfter several hours your belly grumbles loudly')
 };
+classRoom.giveCoffee = () => {
+  alexCaffinated = true
+};
 
 const playerInventory = [];
 const rooms = [mainSt, mrMikes, muddyWaters, foyer, classRoom];
@@ -65,7 +68,7 @@ state = {
 let currentRoom = mainSt;
 
 function enterRoom (nextRoom) {
-  let validTransition = room[currentRoom].canChangeTo;
+  let validTransition = Room[currentRoom].canChangeTo;
   if (validTransition.includes(nextRoom)) {
     currentRoom = nextRoom;
   }
@@ -73,13 +76,13 @@ function enterRoom (nextRoom) {
     throw 'invalid path from ' + currentRoom + ' to ' + nextRoom;
   }
 }
-let currentRoom = null;
-function moveToRoom(newRoom) {
+
+/*function moveToRoom(newRoom) {
   if (canMoveToRoom(newRoom)) {
     currentRoom = newRoom
   }
-}
+}*/
 
 console.log(currentRoom);
-moveToRoom(mrMikes);
+enterRoom(mrMikes);
 console.log(currentRoom)
