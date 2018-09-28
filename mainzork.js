@@ -21,7 +21,7 @@ const playerInventory = [];
 
 const mainSt = new Room();
 mainSt.description = () => {
-  console.log("You are standing on Main St.\nIn front of you is a door with a keypad.\nthere is a sign beside the door.\nnext door is the coffee shop, Muddy Waters.\nDown the street is Mr. Mike's pizza")};
+  console.log("You are standing on Main St.\nIn front of you is a door with a keypad.\nThere is a sign beside the door.\nNext door is the coffee shop, Muddy Waters.\nDown the street is Mr. Mike's pizza")};
 mainSt.sign = () => {
   console.log('Welcome to the Burlington Code Academy.\nthe door code is 12345')};
 mainSt.unlock = () => {
@@ -48,7 +48,7 @@ muddyWaters.coffee = () => {
 const foyer = new Room();
 foyer.isLocked = true;
 foyer.description = () => {
-  console.log('You are standing in a foyer.\nIn the corner is a pile of newspapers.')
+  console.log('You are standing in a foyer.\nIn the corner is a pile of newspapers.\nThere are stairs leading up.')
 };
 foyer.takePaper = () => {
   playerInventory.push('newspaper')
@@ -57,7 +57,7 @@ foyer.takePaper = () => {
 
 const classRoom = new Room();
 classRoom.description = () => {
-  console.log('You are in well lit room on the third floor.\nAlex lurks in the corner.')
+  console.log('You are in a well lit room on the third floor.\nAlex lurks in the corner.')
 }
 classRoom.alexCaffinated = false;
 classRoom.lectureNoCoffee = () => {
@@ -210,10 +210,6 @@ async function classStart() {
   else if (userIn.toLowerCase() === 'give coffee' || userIn.toLowerCase() === 'give alex coffee' && playerInventory.includes('coffee') === false) {
     console.log('You have no coffee to give...');
     classStart()
-  }
-  else if (playerInventory.includes('pizza') && playerInventory.includes('knowledge')) {
-    console.log('Congratulations! You succesfully completed the game.');
-    process.exit()
   }
   else {
     console.log('Invalid input.');
