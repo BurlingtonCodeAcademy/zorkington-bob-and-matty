@@ -26,7 +26,7 @@ mainSt.sign = () => {
   console.log('Welcome to the Burlington Code Academy.\nthe door code is 12345')};
 mainSt.unlock = () => {
   foyer.isLocked = false
-}
+};
 
 const mrMikes = new Room();
 mrMikes.description = () => {
@@ -101,12 +101,14 @@ async function mainStart() {
     mainStart();
   }
   else if (userIn.toLowerCase() === 'open door' && foyer.isLocked === false) {
+    console.log('You step through the door.')
     foyerStart();
   }
   else if (userIn.toLowerCase() === 'unlock door') {
     let keypad = await ask('The keypad has 0-9 on it.\nWhat would you like to punch in?');
     if (keypad === '12345') {
       mainSt.unlock();
+      console.log('The door unlocks with a faint *click*');
       mainStart()
     }
     else {
@@ -130,7 +132,8 @@ async function mainStart() {
     };
   }
   else {console.log('Invalid input. Please try again');
-  mainStart();}
+  mainStart();
+  }
 };
 
 async function mrMikesStart() {
@@ -139,7 +142,10 @@ async function mrMikesStart() {
   if (userIn.toLowerCase() === 'exit') {
     mainStart();
   }
-
+  else {
+    console.log('Invalid input.');
+    mrMikesStart();
+  }
 };
 
 async function muddyStart() {
@@ -148,7 +154,13 @@ async function muddyStart() {
   if (userIn.toLowerCase() === 'exit') {
     mainStart();
   }
-
+  else if (userIn.toLowerCase() === 'buy coffee' || userIn.toLowerCase() === 'get coffee') {
+    muddyWaters.coffee();
+  }
+  else {
+    console.log('Invalid input.');
+    muddyStart();
+  }
 };
 
 async function foyerStart() {
@@ -164,18 +176,23 @@ async function foyerStart() {
     foyer.takePaper();
     foyerStart();
   }
-
+  else {
+    console.log('Invalid input.');
+    foyerStart();
+  }
 };
 
 async function classStart() {
   enterRoom(classRoom);
   let userIn = await ask('>_ ');
-  if (userIn.toLowerCase() === 'exit') {
+  if (userIn.toLowerCase() === 'exit' || userIn.toLowerCase() === 'leave') {
     foyerStart();
   }
-
+  else {
+    console.log('Invalid input.');
+    classStart();
+  }
 };
-
 
 startGame();
 
