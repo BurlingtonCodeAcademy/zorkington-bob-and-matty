@@ -21,7 +21,7 @@ const playerInventory = [];
 
 const mainSt = new Room();
 mainSt.description = () => {
-  console.log('You are standing on Main St.\nIn front of you is a door with a keypad.\nthere is a sign beside the door')};
+  console.log("You are standing on Main St.\nIn front of you is a door with a keypad.\nthere is a sign beside the door.\nnext door is the coffee shop, Muddy Waters.\nDown the strees is Mr. Mike's pizza")};
 mainSt.sign = () => {
   console.log('Welcome to the Burlington Code Academy.\nthe door code is 12345')};
 mainSt.unlock = () => {
