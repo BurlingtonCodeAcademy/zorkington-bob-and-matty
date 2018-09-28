@@ -79,7 +79,7 @@ function enterRoom(room) {
 
 async function startGame() {
   let init = await ask('Welcome to our world. Please do not use punctuation. Are you prepared? ')
-  if (init.toLowerCase() === 'yes') {
+  if (init.toLowerCase() === 'yes' || userIn.toLowerCase() === 'yup' || userIn.toLowerCase() === 'y' || userIn.toLowerCase() === 'yeah') {
     mainStart();
   }
   else {console.log("Let's try that again...");
@@ -92,6 +92,10 @@ async function mainStart() {
   if (userIn.toLowerCase() === 'read sign' || userIn.toLowerCase() === 'examine sign' || userIn.toLowerCase() === 'look at sign') {
     mainSt.sign();
     mainStart();
+  }
+  else if (userIn.toLowerCase() === 'take sign' || userIn.toLowerCase() === 'pick up sign') {
+    console.log("The sign is securely bolted to the wall.");
+    mainStart()
   }
   else if (userIn.toLowerCase() === 'open door' || userIn.toLowerCase() === 'enter door' || userIn.toLowerCase() === 'enter' && foyer.isLocked === true) {
     console.log('The door is locked.');
@@ -113,10 +117,10 @@ async function mainStart() {
       mainStart();
     }
   }
-  else if (userIn.toLowerCase() === 'go to mr mikes') {
+  else if (userIn.toLowerCase() === 'go to mr mikes' || userIn.toLowerCase() === "go to mr mike's" || userIn.toLowerCase() === 'go to pizza'  || userIn.toLowerCase() === 'enter mr mikes' || userIn.toLowerCase() === "enter mr mike's") {
     mrMikesStart();
   }
-  else if (userIn.toLowerCase() === 'go to muddy waters') {
+  else if (userIn.toLowerCase() === 'go to muddy waters' || userIn.toLowerCase() === 'enter muddy waters') {
     muddyStart();
   }
   else if (userIn.toLowerCase() === 'exit'){
@@ -126,9 +130,13 @@ async function mainStart() {
     }
     else if (confirmExit.toLowerCase() === 'y') {
       process.exit();
-    };
+    }
+    else {
+      console.log('Invalid input...');
+      mainStart();
+    }
   }
-  else {console.log('Invalid input. Please try again');
+  else {console.log('Invalid input...');
   mainStart();
   }
 };
@@ -136,7 +144,7 @@ async function mainStart() {
 async function mrMikesStart() {
   enterRoom(mrMikes);
   let userIn = await ask('>_ ');
-  if (userIn.toLowerCase() === 'exit') {
+  if (userIn.toLowerCase() === 'exit' || userIn.toLowerCase() === 'leave' || userIn.toLowerCase() === 'go back') {
     mainStart();
   }
   else if (userIn.toLowerCase() === 'get pizza' || userIn.toLowerCase() === 'buy pizza') {
@@ -144,7 +152,7 @@ async function mrMikesStart() {
     mrMikesStart();
   }
   else {
-    console.log('Invalid input.');
+    console.log('Invalid input...');
     mrMikesStart();
   }
 };
@@ -152,7 +160,7 @@ async function mrMikesStart() {
 async function muddyStart() {
   enterRoom(muddyWaters);
   let userIn = await ask('>_ ');
-  if (userIn.toLowerCase() === 'exit') {
+  if (userIn.toLowerCase() === 'exit' || userIn.toLowerCase() === 'leave' || userIn.toLowerCase() === 'go back') {
     mainStart();
   }
   else if (userIn.toLowerCase() === 'buy coffee' || userIn.toLowerCase() === 'get coffee') {
@@ -168,7 +176,7 @@ async function muddyStart() {
 async function foyerStart() {
   enterRoom(foyer);
   let userIn = await ask('>_ ');
-  if (userIn.toLowerCase() === 'exit' || userIn.toLowerCase() === 'leave') {
+  if (userIn.toLowerCase() === 'exit' || userIn.toLowerCase() === 'leave' || userIn.toLowerCase() === 'go back') {
     mainStart();
   }
   else if (userIn.toLowerCase() === 'go upstairs' || userIn.toLowerCase() === 'go up' || userIn.toLowerCase() === 'ascend') {
@@ -191,7 +199,7 @@ async function foyerStart() {
 async function classStart() {
   enterRoom(classRoom);
   let userIn = await ask('>_ ');
-  if (userIn.toLowerCase() === 'exit' || userIn.toLowerCase() === 'leave') {
+  if (userIn.toLowerCase() === 'exit' || userIn.toLowerCase() === 'leave' || userIn.toLowerCase() === 'go back' || userIn.toLowerCase() === 'go down') {
     foyerStart();
   }
   else if (userIn.toLowerCase() === 'talk to alex' || userIn.toLowerCase() === 'talk'|| userIn.toLowerCase() === 'attend lecture' && classRoom.alexCaffinated === false) {
@@ -212,7 +220,7 @@ async function classStart() {
     classStart()
   }
   else {
-    console.log('Invalid input.');
+    console.log('Invalid input...');
     classStart();
   }
 };
