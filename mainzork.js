@@ -166,7 +166,7 @@ async function muddyStart() {
 async function foyerStart() {
   enterRoom(foyer);
   let userIn = await ask('>_ ');
-  if (userIn.toLowerCase() === 'exit') {
+  if (userIn.toLowerCase() === 'exit' || userIn.toLowerCase() === 'leave') {
     mainStart();
   }
   else if (userIn.toLowerCase() === 'go upstairs' || userIn.toLowerCase() === 'go up') {
@@ -191,11 +191,11 @@ async function classStart() {
   if (userIn.toLowerCase() === 'exit' || userIn.toLowerCase() === 'leave') {
     foyerStart();
   }
-  else if (userIn.toLowerCase() === 'talk to alex' || userIn.toLowerCase() === 'talk' && classRoom.alexCaffinated === false) {
+  else if (userIn.toLowerCase() === 'talk to alex' || userIn.toLowerCase() === 'talk'|| userIn.toLowerCase() === 'attend lecture' && classRoom.alexCaffinated === false) {
     classRoom.lectureNoCoffee();
     classStart();
   }
-  else if (userIn.toLowerCase() === 'talk to alex' || userIn.toLowerCase() === 'talk' && classRoom.alexCaffinated === true) {
+  else if (userIn.toLowerCase() === 'talk to alex' || userIn.toLowerCase() === 'talk' || userIn.toLowerCase() === 'attend lecture' && classRoom.alexCaffinated === true) {
   classRoom.lectureHasCoffee();
   classStart();
   }
@@ -207,6 +207,10 @@ async function classStart() {
   else if (userIn.toLowerCase() === 'give coffee' || userIn.toLowerCase() === 'give alex coffee' && playerInventory.includes('coffee') === false) {
     console.log('You have no coffee to give...');
     classStart()
+  }
+  else if (playerInventory.includes('pizza') && playerInventory.includes('knowledge')) {
+    console.log('Congratulations! You succesfully completed the game.');
+    process.exit()
   }
   else {
     console.log('Invalid input.');
