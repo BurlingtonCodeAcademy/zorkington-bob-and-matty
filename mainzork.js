@@ -91,18 +91,22 @@ async function mainStart() {
   let userIn = await ask('>_ ')
   if (userIn.toLowerCase() === 'read sign' || userIn.toLowerCase() === 'examine sign' || userIn.toLowerCase() === 'look at sign') {
     mainSt.sign();
+    console.log('\n')
     mainStart();
   }
   else if (userIn.toLowerCase() === 'take sign' || userIn.toLowerCase() === 'pick up sign') {
     console.log("The sign is securely bolted to the wall.");
+    console.log('\n')
     mainStart()
   }
   else if (userIn.toLowerCase() === 'open door' || userIn.toLowerCase() === 'enter door' || userIn.toLowerCase() === 'enter' && foyer.isLocked === true) {
     console.log('The door is locked.');
+    console.log('\n')
     mainStart();
   }
   else if (userIn.toLowerCase() === 'open door' || userIn.toLowerCase() === 'enter door' || userIn.toLowerCase() === 'enter' && foyer.isLocked === false) {
     console.log('You step through the door.')
+    console.log('\n')
     foyerStart();
   }
   else if (userIn.toLowerCase() === 'unlock door' || userIn.toLowerCase() === 'examine keypad' || userIn.toLowerCase() === 'unlock') {
@@ -110,22 +114,27 @@ async function mainStart() {
     if (keypad === '12345') {
       mainSt.unlock();
       console.log('The door unlocks with a faint *click*');
+      console.log('\n')
       mainStart()
     }
     else {
       console.log('bzzzzt...wrong code.');
+      console.log('\n')
       mainStart();
     }
   }
   else if (userIn.toLowerCase() === 'go to mr mikes' || userIn.toLowerCase() === "go to mr mike's" || userIn.toLowerCase() === 'go to pizza'  || userIn.toLowerCase() === 'enter mr mikes' || userIn.toLowerCase() === "enter mr mike's") {
+    console.log('\n')
     mrMikesStart();
   }
   else if (userIn.toLowerCase() === 'go to muddy waters' || userIn.toLowerCase() === 'enter muddy waters') {
+    console.log('\n')
     muddyStart();
   }
   else if (userIn.toLowerCase() === 'exit'){
     let confirmExit = await ask("Are you sure you'd like to quit (Y/N)? ");
     if (confirmExit.toLowerCase() === 'n'){
+      console.log('\n')
       mainStart();
     }
     else if (confirmExit.toLowerCase() === 'y') {
@@ -133,10 +142,12 @@ async function mainStart() {
     }
     else {
       console.log('Invalid input...');
+      console.log('\n')
       mainStart();
     }
   }
   else {console.log('Invalid input...');
+  console.log('\n')
   mainStart();
   }
 };
@@ -145,14 +156,17 @@ async function mrMikesStart() {
   enterRoom(mrMikes);
   let userIn = await ask('>_ ');
   if (userIn.toLowerCase() === 'exit' || userIn.toLowerCase() === 'leave' || userIn.toLowerCase() === 'go back') {
+    console.log('\n')
     mainStart();
   }
   else if (userIn.toLowerCase() === 'get pizza' || userIn.toLowerCase() === 'buy pizza') {
     mrMikes.pizza();
+    console.log('\n')
     mrMikesStart();
   }
   else {
     console.log('Invalid input...');
+    console.log('\n')
     mrMikesStart();
   }
 };
@@ -161,14 +175,17 @@ async function muddyStart() {
   enterRoom(muddyWaters);
   let userIn = await ask('>_ ');
   if (userIn.toLowerCase() === 'exit' || userIn.toLowerCase() === 'leave' || userIn.toLowerCase() === 'go back') {
+    console.log('\n')
     mainStart();
   }
   else if (userIn.toLowerCase() === 'buy coffee' || userIn.toLowerCase() === 'get coffee') {
     muddyWaters.coffee();
+    console.log('\n')
     muddyStart();
   }
   else {
     console.log('Invalid input.');
+    console.log('\n')
     muddyStart();
   }
 };
@@ -177,21 +194,26 @@ async function foyerStart() {
   enterRoom(foyer);
   let userIn = await ask('>_ ');
   if (userIn.toLowerCase() === 'exit' || userIn.toLowerCase() === 'leave' || userIn.toLowerCase() === 'go back') {
+    console.log('\n')
     mainStart();
   }
   else if (userIn.toLowerCase() === 'go upstairs' || userIn.toLowerCase() === 'go up' || userIn.toLowerCase() === 'ascend') {
+    console.log('\n')
     classStart();
   }
   else if (userIn.toLowerCase() === 'take paper' || userIn.toLowerCase() === 'pick up paper' || userIn.toLowerCase() === 'take newspaper' || userIn.toLowerCase() === 'pick up newspaper') {
     foyer.takePaper();
+    console.log('\n')
     foyerStart();
   }
   else if (userIn.toLowerCase() === 'read paper' || userIn.toLowerCase() === 'examine paper' || userIn.toLowerCase() === 'read newspaper' || userIn.toLowerCase() === 'examine newspaper' || userIn.toLowerCase() === 'examine newspapers' || userIn.toLowerCase() === 'read newspapers') {
     console.log('You flip through the paper.\nWhile there are some interesting articles nothing is relevent to your quest.\nYou put the paper back on the pile');
+    console.log('\n')
     foyerStart();
   }
   else {
     console.log('Invalid input...');
+    console.log('\n')
     foyerStart();
   }
 };
@@ -200,27 +222,33 @@ async function classStart() {
   enterRoom(classRoom);
   let userIn = await ask('>_ ');
   if (userIn.toLowerCase() === 'exit' || userIn.toLowerCase() === 'leave' || userIn.toLowerCase() === 'go back' || userIn.toLowerCase() === 'go down') {
+    console.log('\n')
     foyerStart();
   }
   else if (userIn.toLowerCase() === 'talk to alex' || userIn.toLowerCase() === 'talk'|| userIn.toLowerCase() === 'attend lecture' && classRoom.alexCaffinated === false) {
     classRoom.lectureNoCoffee();
+    console.log('\n')
     classStart();
   }
   else if (userIn.toLowerCase() === 'talk to alex' || userIn.toLowerCase() === 'talk' || userIn.toLowerCase() === 'attend lecture' && classRoom.alexCaffinated === true) {
   classRoom.lectureHasCoffee();
+  console.log('\n')
   classStart();
   }
   else if (userIn.toLowerCase() === 'give coffee' || userIn.toLowerCase() === 'give alex coffee' && playerInventory.includes('coffee') === true) {
     classRoom.giveCoffee();
     console.log('Alex thanks you for the coffee.\nMaybe now he will be a little more inteligible...');
+    console.log('\n')
     classStart();
   }
   else if (userIn.toLowerCase() === 'give coffee' || userIn.toLowerCase() === 'give alex coffee' && playerInventory.includes('coffee') === false) {
     console.log('You have no coffee to give...');
+    console.log('\n')
     classStart()
   }
   else {
     console.log('Invalid input...');
+    console.log('\n')
     classStart();
   }
 };
