@@ -71,32 +71,14 @@ classRoom.giveCoffee = () => {
   alexCaffinated = true
 };
 
-const rooms = [mainSt, mrMikes, muddyWaters, foyer, classRoom];
+let currentRoom = mainSt;
 
-state = {
-  mainSt: {canChangeTo: [foyer, mrMikes, muddyWaters, mainSt]},
-  mrMikes: {canChangeTo: [mainSt, mrMikes]},
-  muddyWaters: {canChangeTo: [mainSt, muddyWaters]},
-  foyer: {canChangeTo: [mainSt, classRoom, foyer]},
-  classRoom: {canChangeTo: [foyer, classRoom]}
-
+function enterRoom(nextRoom) {
+  nextRoom.description();
+  currentRoom = nextRoom;
 };
 
-
-let currentRoom = state.mainSt;
-
-function enterRoom (nextRoom) {
-  let validTransition = currentRoom.canChangeTo;
-  if (validTransition.includes(nextRoom)) {
-    nextRoom.description();
-    currentRoom = state.nextRoom;  
-  }
-  else {
-    throw 'invalid path from ' + currentRoom + ' to ' + nextRoom;
-  }
-};
-
-//this is where the body of the game starts, everything above is framework, and functional (I think)
+//this is where the body of the game starts, everything above is framework
 
 async function startGame() {
   let init = await ask('Welcome to our world. Please do not use punctuation. Are you prepared? ')
