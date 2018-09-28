@@ -39,7 +39,7 @@ mrMikes.pizza = () => {
 
 const muddyWaters = new Room();
 muddyWaters.description = () => {
-  console.log('You bang your head on the ceiling as you enter the dungeon-like confines of Muddy Waters. /n the coffee shop hums with activity')};
+  console.log('You bang your head on the ceiling as you enter the dungeon-like confines of Muddy Waters.\nThe coffee shop hums with activity')};
 muddyWaters.coffee = () => {
   console.log('You buy some piping hot coffee');
   playerInventory.push('coffee')
@@ -96,11 +96,11 @@ async function mainStart() {
     mainSt.sign();
     mainStart();
   }
-  else if (userIn.toLowerCase() === ('open door' && foyer.isLocked === true)) {
+  else if (userIn.toLowerCase() === 'open door' && foyer.isLocked === true) {
     console.log('The door is locked.');
     mainStart();
   }
-  else if (userIn.toLowerCase() === ('open door' && foyer.isLocked === false)) {
+  else if (userIn.toLowerCase() === 'open door' && foyer.isLocked === false) {
     foyerStart();
   }
   else if (userIn.toLowerCase() === 'unlock door') {
