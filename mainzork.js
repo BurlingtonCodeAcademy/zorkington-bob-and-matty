@@ -100,29 +100,29 @@ function enterRoom (nextRoom) {
 
 async function startGame() {
   let init = await ask('Welcome to our world. Please do not use punctuation. Are you prepared? ')
-  if (init.toLowerCase() = 'yes') {
+  if (init.toLowerCase() === 'yes') {
     mainStart();
   }
   else {console.log("Let's try that again...");
-  startGame();};
+  startGame()};
 };
 
 async function mainStart() {
   enterRoom(mainSt);
   let userIn = await ask('>_ ')
-  if (userIn.toLowerCase === 'read sign') {
+  if (userIn.toLowerCase() === 'read sign') {
     mainSt.sign();
     mainStart();
   }
-  else if (userIn.toLowerCase === ('open door' && foyer.isLocked === true)) {
+  else if (userIn.toLowerCase() === ('open door' && foyer.isLocked === true)) {
     console.log('The door is locked.');
     mainStart();
   }
-  else if (userIn.toLowerCase === ('open door' && foyer.isLocked === false)) {
+  else if (userIn.toLowerCase() === ('open door' && foyer.isLocked === false)) {
     foyerStart();
   }
-  else if (userIn.toLowerCase === 'unlock door') {
-    let keypad = await ask('The keypad has 0-9 on it.\nWhat would you like to enter?');
+  else if (userIn.toLowerCase() === 'unlock door') {
+    let keypad = await ask('The keypad has 0-9 on it.\nWhat would you like to punch in?');
     if (keypad === '12345') {
       mainSt.unlock();
       mainStart()
@@ -132,13 +132,13 @@ async function mainStart() {
       mainStart();
     }
   }
-  else if (userIn.toLowerCase === 'go to mr mikes') {
+  else if (userIn.toLowerCase() === 'go to mr mikes') {
     mrMikesStart();
   }
-  else if (userIn.toLowerCase === 'go to muddy waters') {
+  else if (userIn.toLowerCase() === 'go to muddy waters') {
     muddyStart();
   }
-  else if (userIn.toLowerCase === 'exit'){
+  else if (userIn.toLowerCase() === 'exit'){
     let confirmExit = await ask("Are you sure you'd like to quit (Y/N)?");
     if (confirmExit.toLowerCase() === 'n'){
       mainStart();
