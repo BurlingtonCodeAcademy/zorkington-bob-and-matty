@@ -24,9 +24,6 @@ mainSt.description = () => {
   console.log("You are standing on Main St.\nIn front of you is a door with a keypad.\nThere is a sign beside the door.\nNext door is the coffee shop, Muddy Waters.\nDown the street is Mr. Mike's pizza")};
 mainSt.sign = () => {
   console.log('Welcome to the Burlington Code Academy.\nthe door code is 12345')};
-mainSt.unlock = () => {
-  foyer.isLocked = false
-};
 
 const mrMikes = new Room();
 mrMikes.description = () => {
@@ -53,6 +50,9 @@ foyer.description = () => {
 foyer.takePaper = () => {
   playerInventory.push('newspaper')
   console.log('You pick up a newspaper')
+};
+foyer.unlock = () => {
+  foyer.isLocked = false
 };
 
 const classRoom = new Room();
@@ -112,7 +112,7 @@ async function mainStart() {
   else if (userIn.toLowerCase() === 'unlock door' || userIn.toLowerCase() === 'examine keypad' || userIn.toLowerCase() === 'unlock') {
     let keypad = await ask('The keypad has 0-9 on it.\nWhat would you like to punch in?');
     if (keypad === '12345') {
-      mainSt.unlock();
+      foyer.unlock();
       console.log('The door unlocks with a faint *click*');
       console.log('\n')
       mainStart()
@@ -254,6 +254,8 @@ async function classStart() {
 };
 
 startGame();
+
+//make action and rule methods or arrays for room constructer, then pass in rules
 
 /*Main St. if currentRoom === state.mainSt
 if user reads sign mainSt.sign()
