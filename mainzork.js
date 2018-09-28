@@ -21,7 +21,7 @@ const playerInventory = [];
 
 const mainSt = new Room();
 mainSt.description = () => {
-  console.log("You are standing on Main St.\nIn front of you is a door with a keypad.\nthere is a sign beside the door.\nnext door is the coffee shop, Muddy Waters.\nDown the strees is Mr. Mike's pizza")};
+  console.log("You are standing on Main St.\nIn front of you is a door with a keypad.\nthere is a sign beside the door.\nnext door is the coffee shop, Muddy Waters.\nDown the street is Mr. Mike's pizza")};
 mainSt.sign = () => {
   console.log('Welcome to the Burlington Code Academy.\nthe door code is 12345')};
 mainSt.unlock = () => {
@@ -57,7 +57,7 @@ foyer.takePaper = () => {
 
 const classRoom = new Room();
 classRoom.description = () => {
-  console.log('You enter a well lit room on the third floor.\nAlex C lurks in the corner.')
+  console.log('You enter a well lit room on the third floor.\nAlex C. lurks in the corner.')
 }
 classRoom.alexCaffinated = false;
 classRoom.lectureNoCoffee = () => {
@@ -71,7 +71,7 @@ classRoom.giveCoffee = () => {
   alexCaffinated = true
 };
 
-let currentRoom = mainSt;
+//let currentRoom = mainSt;
 
 function enterRoom(nextRoom) {
   nextRoom.description();
@@ -92,19 +92,19 @@ async function startGame() {
 async function mainStart() {
   enterRoom(mainSt);
   let userIn = await ask('>_ ')
-  if (userIn.toLowerCase() === 'read sign') {
+  if (userIn.toLowerCase() === 'read sign' || userIn.toLowerCase() === 'examine sign' || userIn.toLowerCase() === 'look at sign') {
     mainSt.sign();
     mainStart();
   }
-  else if (userIn.toLowerCase() === 'open door' && foyer.isLocked === true) {
+  else if (userIn.toLowerCase() === 'open door' || userIn.toLowerCase() === 'enter door' || userIn.toLowerCase() === 'enter' && foyer.isLocked === true) {
     console.log('The door is locked.');
     mainStart();
   }
-  else if (userIn.toLowerCase() === 'open door' && foyer.isLocked === false) {
+  else if (userIn.toLowerCase() === 'open door' || userIn.toLowerCase() === 'enter door' || userIn.toLowerCase() === 'enter' && foyer.isLocked === false) {
     console.log('You step through the door.')
     foyerStart();
   }
-  else if (userIn.toLowerCase() === 'unlock door') {
+  else if (userIn.toLowerCase() === 'unlock door' || userIn.toLowerCase() === 'examine keypad' || userIn.toLowerCase() === 'unlock') {
     let keypad = await ask('The keypad has 0-9 on it.\nWhat would you like to punch in?');
     if (keypad === '12345') {
       mainSt.unlock();
@@ -169,7 +169,7 @@ async function foyerStart() {
   if (userIn.toLowerCase() === 'exit' || userIn.toLowerCase() === 'leave') {
     mainStart();
   }
-  else if (userIn.toLowerCase() === 'go upstairs' || userIn.toLowerCase() === 'go up') {
+  else if (userIn.toLowerCase() === 'go upstairs' || userIn.toLowerCase() === 'go up' || userIn.toLowerCase() === 'ascend') {
     classStart();
   }
   else if (userIn.toLowerCase() === 'take paper' || userIn.toLowerCase() === 'pick up paper' || userIn.toLowerCase() === 'take newspaper' || userIn.toLowerCase() === 'pick up newspaper') {
@@ -177,7 +177,8 @@ async function foyerStart() {
     foyerStart();
   }
   else if (userIn.toLowerCase() === 'read paper' || userIn.toLowerCase() === 'examine paper' || userIn.toLowerCase() === 'read newspaper' || userIn.toLowerCase() === 'examine newspaper' || userIn.toLowerCase() === 'examine newspapers' || userIn.toLowerCase() === 'read newspapers') {
-    console.log('You flip through the paper.\nWhile there are some interesting articles nothing is relevent to your quest.\nYou put the paper back on the pile')
+    console.log('You flip through the paper.\nWhile there are some interesting articles nothing is relevent to your quest.\nYou put the paper back on the pile');
+    foyerStart();
   }
   else {
     console.log('Invalid input...');
