@@ -172,15 +172,15 @@ async function foyerStart() {
   else if (userIn.toLowerCase() === 'go upstairs' || userIn.toLowerCase() === 'go up') {
     classStart();
   }
-  else if (userIn.toLowerCase() === 'take paper' || userIn.toLowerCase() === 'pick up paper') {
+  else if (userIn.toLowerCase() === 'take paper' || userIn.toLowerCase() === 'pick up paper' || userIn.toLowerCase() === 'take newspaper' || userIn.toLowerCase() === 'pick up newspaper') {
     foyer.takePaper();
     foyerStart();
   }
-  else if (userIn.toLowerCase() === 'read paper') {
+  else if (userIn.toLowerCase() === 'read paper' || userIn.toLowerCase() === 'examine paper' || userIn.toLowerCase() === 'read newspaper' || userIn.toLowerCase() === 'examine newspaper' || userIn.toLowerCase() === 'examine newspapers' || userIn.toLowerCase() === 'read newspapers') {
     console.log('You flip through the paper.\nWhile there are some interesting articles nothing is relevent to your quest.\nYou put the paper back on the pile')
   }
   else {
-    console.log('Invalid input.');
+    console.log('Invalid input...');
     foyerStart();
   }
 };
