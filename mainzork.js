@@ -169,12 +169,15 @@ async function foyerStart() {
   if (userIn.toLowerCase() === 'exit') {
     mainStart();
   }
-  else if (userIn.toLowerCase() === 'go upstairs') {
+  else if (userIn.toLowerCase() === 'go upstairs' || userIn.toLowerCase() === 'go up') {
     classStart();
   }
-  else if (userIn.toLowerCase() === 'take paper') {
+  else if (userIn.toLowerCase() === 'take paper' || userIn.toLowerCase() === 'pick up paper') {
     foyer.takePaper();
     foyerStart();
+  }
+  else if (userIn.toLowerCase() === 'read paper') {
+    console.log('You flip through the paper.\nWhile there are some interesting articles nothing is relevent to your quest.\nYou put the paper back on the pile')
   }
   else {
     console.log('Invalid input.');
@@ -187,6 +190,23 @@ async function classStart() {
   let userIn = await ask('>_ ');
   if (userIn.toLowerCase() === 'exit' || userIn.toLowerCase() === 'leave') {
     foyerStart();
+  }
+  else if (userIn.toLowerCase() === 'talk to alex' || userIn.toLowerCase() === 'talk' && classRoom.alexCaffinated === false) {
+    classRoom.lectureNoCoffee();
+    classStart();
+  }
+  else if (userIn.toLowerCase() === 'talk to alex' || userIn.toLowerCase() === 'talk' && classRoom.alexCaffinated === true) {
+  classRoom.lectureHasCoffee();
+  classStart();
+  }
+  else if (userIn.toLowerCase() === 'give coffee' || userIn.toLowerCase() === 'give alex coffee' && playerInventory.includes('coffee') === true) {
+    classRoom.giveCoffee()
+    console.log('Alex thanks you for the coffee.\nMaybe now he will be a little more inteligible...');
+    classStart();
+  }
+  else if (userIn.toLowerCase() === 'give coffee' || userIn.toLowerCase() === 'give alex coffee' && playerInventory.includes('coffee') === false) {
+    console.log('You have no coffee to give...');
+    classStart()
   }
   else {
     console.log('Invalid input.');
