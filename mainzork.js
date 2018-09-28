@@ -30,7 +30,7 @@ mainSt.unlock = () => {
 
 const mrMikes = new Room();
 mrMikes.description = () => {
-  console.log("You enter Mr. Mike's.\nYou are surrounded by the delicious fragrance of cooking pizza.")
+  console.log("You are in Mr. Mike's.\nYou are surrounded by the delicious fragrance of cooking pizza.")
 };
 mrMikes.pizza = () => {
   console.log('You buy some tasty pizza');
@@ -39,7 +39,7 @@ mrMikes.pizza = () => {
 
 const muddyWaters = new Room();
 muddyWaters.description = () => {
-  console.log('You bang your head on the ceiling as you enter the dungeon-like confines of Muddy Waters.\nThe coffee shop hums with activity')};
+  console.log('You bang your head on the ceiling in the dungeon-like confines of Muddy Waters.\nThe coffee shop hums with activity')};
 muddyWaters.coffee = () => {
   console.log('You buy some piping hot coffee');
   playerInventory.push('coffee')
@@ -57,7 +57,7 @@ foyer.takePaper = () => {
 
 const classRoom = new Room();
 classRoom.description = () => {
-  console.log('You enter a well lit room on the third floor.\nAlex C. lurks in the corner.')
+  console.log('You are in well lit room on the third floor.\nAlex lurks in the corner.')
 }
 classRoom.alexCaffinated = false;
 classRoom.lectureNoCoffee = () => {
@@ -68,7 +68,7 @@ classRoom.lectureHasCoffee = () => {
   playerInventory.push('knowledge')
 };
 classRoom.giveCoffee = () => {
-  alexCaffinated = true
+  classRoom.alexCaffinated = true
 };
 
 function enterRoom(room) {
@@ -139,6 +139,10 @@ async function mrMikesStart() {
   if (userIn.toLowerCase() === 'exit') {
     mainStart();
   }
+  else if (userIn.toLowerCase() === 'get pizza' || userIn.toLowerCase() === 'buy pizza') {
+    mrMikes.pizza();
+    mrMikesStart();
+  }
   else {
     console.log('Invalid input.');
     mrMikesStart();
@@ -199,7 +203,7 @@ async function classStart() {
   classStart();
   }
   else if (userIn.toLowerCase() === 'give coffee' || userIn.toLowerCase() === 'give alex coffee' && playerInventory.includes('coffee') === true) {
-    classRoom.giveCoffee()
+    classRoom.giveCoffee();
     console.log('Alex thanks you for the coffee.\nMaybe now he will be a little more inteligible...');
     classStart();
   }
