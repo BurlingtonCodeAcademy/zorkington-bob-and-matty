@@ -30,7 +30,7 @@ mainSt.unlock = () => {
 
 const mrMikes = new Room();
 mrMikes.description = () => {
-  console.log('You enter Mr. Mikes.\nYou are surrounded by the delicious fragrance of cooking pizza.')
+  console.log("You enter Mr. Mike's.\nYou are surrounded by the delicious fragrance of cooking pizza.")
 };
 mrMikes.pizza = () => {
   console.log('You buy some tasty pizza');
@@ -71,11 +71,8 @@ classRoom.giveCoffee = () => {
   alexCaffinated = true
 };
 
-//let currentRoom = mainSt;
-
-function enterRoom(nextRoom) {
-  nextRoom.description();
-  currentRoom = nextRoom;
+function enterRoom(room) {
+  room.description();
 };
 
 //this is where the body of the game starts, everything above is framework
@@ -123,7 +120,7 @@ async function mainStart() {
     muddyStart();
   }
   else if (userIn.toLowerCase() === 'exit'){
-    let confirmExit = await ask("Are you sure you'd like to quit (Y/N)?");
+    let confirmExit = await ask("Are you sure you'd like to quit (Y/N)? ");
     if (confirmExit.toLowerCase() === 'n'){
       mainStart();
     }
