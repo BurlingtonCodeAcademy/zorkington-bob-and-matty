@@ -153,6 +153,7 @@ async function muddyStart() {
   }
   else if (userIn.toLowerCase() === 'buy coffee' || userIn.toLowerCase() === 'get coffee') {
     muddyWaters.coffee();
+    muddyStart();
   }
   else {
     console.log('Invalid input.');
